@@ -91,16 +91,19 @@ function App() {
                   <span>Keep on Dancing</span>
                 </div>
               </div>
-              <div className="search-container">
-                <input type="text"
-                  value={searchTerm}
-                  onChange={handleInputChange}
-                  className="search-input"
-                  placeholder="Search..."
-                />
-                <button className="search-button" onClick={handleSearch}>Search</button>
-                <button className="search-button" onClick={handleClearSearch}>Clear</button>
-                <FontAwesomeIcon onClick={handleLogout} icon={faClose} size='3x' color='#4c3571' style={{marginLeft: '5px'}} />
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'right', gap: '10px'}}>
+                <div className="search-container">
+                  <input type="text"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    className="search-input"
+                    placeholder="Search..."
+                  />
+                  <button className="search-button" onClick={handleSearch}>Search</button>
+                  <button className="search-button" onClick={handleClearSearch}>Clear</button>
+                  <FontAwesomeIcon onClick={handleLogout} icon={faClose} size='3x' color='#4c3571' style={{ marginLeft: '5px' }} />
+                </div>
+                <a style={{ color: '#1D191F', textAlign: 'right', marginRight: '32px' }} href={`https://github.com/${user?.nickname}`}>Hello {user?.nickname}!</a>
               </div>
             </div>
             <div className="app">
@@ -135,8 +138,8 @@ function App() {
             </div>
           </>
         ) : (
-          <div style={{height: '100vh', display: 'flex', justifyContent: 'center'}}>
-            <button className="search-button" style={{margin: 'auto'}} onClick={handleLogin}>Login</button>
+          <div style={{ height: '100vh', display: 'flex', justifyContent: 'center' }}>
+            <button className="search-button" style={{ margin: 'auto' }} onClick={handleLogin}>Login</button>
           </div>
         )}
       </div>

@@ -1,5 +1,6 @@
 import './JobRec.css';
 import RecDetail from './RecDetail';
+import "@fontsource/oswald";
 
 interface JobRecProps {
 	idx: number,
@@ -11,8 +12,8 @@ const JobRec = ({ idx, rec }: JobRecProps) => {
 		<>
 			<div className="grid-container">
 				<div className="left-column">
-					<h2 style={{color: '#CCA7F3'}}>{rec.title}</h2>
-					<p style={{color: '#CCA7F3'}} className='percent'>{(rec.matchPercent * 100).toFixed(1)}%</p>
+					<h2 style={{color: '#CCA7F3', fontFamily: 'Oswald'}}>{rec.title}</h2>
+					<p style={{color: '#CCA7F3', fontFamily: 'Oswald'}} className='percent'>{(rec.matchPercent * 100).toFixed(1)}%</p>
 				</div>
 				<div className="right-column">
 					<RecDetail left={true} linked={true} title='Recommended languages' content={rec.recommendation} />
