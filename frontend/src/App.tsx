@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchGitHubData, fetchRecommendations, fetchRecommendationsByJobTitle } from './utils';
-import { Helmet } from "react-helmet";
+import JobRec from './JobRec';
+import "@fontsource/dancing-script";
 
 function App() {
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -69,27 +70,36 @@ function App() {
 
   return (
     <div className="App">
-      <Helmet>
-        <meta httpEquiv="Content-Security-Policy"
-          content="script-src 'self' 'unsafe-eval'; style-src 'self' fonts.googleapis.com;" />
-      </Helmet>
-      <>
+      <video autoPlay loop muted className="video-background">
+        <source src="/file.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div className="app-content">
         {isAuthenticated ? (
           <>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder="Search..."
-              style={{ marginRight: '8px' }} // Simple styling
-            />
-            <button onClick={handleSearch}>Search</button>
-            <button onClick={handleClearSearch}>Clear Search</button>
-            <p>hello {user?.nickname}</p>
-            <h6>Your skills</h6>
-            {languages.map(language => (
-              <span key={language}>{language}, </span>
-            ))}
+            <div className="header">
+              <div className="flex-container">
+                <img 
+                alt="Logo" 
+                className="logo" 
+                src="https://static.wixstatic.com/media/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png/v1/crop/x_0,y_1,w_766,h_766/fill/w_150,h_150,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png" 
+                />
+                <div className="text-container">
+                  <span style={{fontWeight: 800, fontSize: '40px', fontFamily: "Dancing Script"}}>Disco-ver your role</span> <br/>
+                  <span>Keep on Dancing</span>
+                </div>
+              </div>
+              <div className="search-container">
+                <input type="text"
+                  value={searchTerm}
+                  onChange={handleInputChange}
+                  className="search-input"
+                  placeholder="Search..."
+                />
+                <button className="search-button" onClick={handleSearch}>Search</button>
+                <button className="search-button" onClick={handleClearSearch}>Clear</button>
+              </div>
+            </div>
             <div className="app">
               <div className="index">
                 {recommendations.map((rec, idx) => (
@@ -115,24 +125,7 @@ function App() {
                     ref={(el) => (contentRefs.current[idx] = el)}
                     className="content-item"
                   >
-                    <table border={1} cellPadding={5} cellSpacing={0}>
-                      <tr>
-                        <th></th>
-                        <th>Job Title</th>
-                        <th>Recommended Languages</th>
-                        <th>Recommended Platforms</th>
-                        <th>Recommended Databases</th>
-                        <th>Recommended Webframeworks</th>
-                      </tr>
-                      <tr>
-                        <td style={{ wordWrap: 'break-word' }}>{idx + 1}</td>
-                        <td style={{ wordWrap: 'break-word' }}>{rec.title}</td>
-                        <td style={{ wordWrap: 'break-word' }}>{rec.recommendation.map((rec: Record<any, any>) => (<span><a href={rec.url}>{rec.lang}</a> </span>))}</td>
-                        <td style={{ wordWrap: 'break-word' }}>{rec.suggestions.platforms.map((i: string) => (<span>{i} </span>))}</td>
-                        <td style={{ wordWrap: 'break-word' }}>{rec.suggestions.databases.map((i: string) => (<span>{i} </span>))}</td>
-                        <td style={{ wordWrap: 'break-word' }}>{rec.suggestions.webframes.map((i: string) => (<span>{i} </span>))}</td>
-                      </tr>
-                    </table>
+                    <JobRec idx={idx} rec={rec} />
                   </div>
                 ))}
               </div>
@@ -143,7 +136,7 @@ function App() {
             <button onClick={handleLogin}>Login</button>
           </>
         )}
-      </>
+      </div>
     </div >
   );
 }
