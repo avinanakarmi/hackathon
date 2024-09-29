@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchGitHubData, fetchRecommendations, fetchRecommendationsByJobTitle } from './utils';
@@ -37,9 +39,9 @@ function App() {
     loginWithPopup();
   };
 
-  // const handleLogout = () => {
-  //   logout();
-  // };
+  const handleLogout = () => {
+    logout();
+  };
 
   const handleInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSearchTerm(event.target.value);
@@ -79,13 +81,13 @@ function App() {
           <>
             <div className="header">
               <div className="flex-container">
-                <img 
-                alt="Logo" 
-                className="logo" 
-                src="https://static.wixstatic.com/media/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png/v1/crop/x_0,y_1,w_766,h_766/fill/w_150,h_150,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png" 
+                <img
+                  alt="Logo"
+                  className="logo"
+                  src="https://static.wixstatic.com/media/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png/v1/crop/x_0,y_1,w_766,h_766/fill/w_150,h_150,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0b340f_de6cc65b79f24ea8bdb74935b222dfbf~mv2.png"
                 />
                 <div className="text-container">
-                  <span style={{fontWeight: 800, fontSize: '40px', fontFamily: "Dancing Script"}}>Disco-ver your role</span> <br/>
+                  <span style={{ fontWeight: 800, fontSize: '40px', fontFamily: "Dancing Script" }}>Disco-ver your role</span> <br />
                   <span>Keep on Dancing</span>
                 </div>
               </div>
@@ -98,6 +100,7 @@ function App() {
                 />
                 <button className="search-button" onClick={handleSearch}>Search</button>
                 <button className="search-button" onClick={handleClearSearch}>Clear</button>
+                <FontAwesomeIcon onClick={handleLogout} icon={faClose} size='3x' color='#4c3571' style={{marginLeft: '5px'}} />
               </div>
             </div>
             <div className="app">
@@ -132,9 +135,9 @@ function App() {
             </div>
           </>
         ) : (
-          <>
-            <button onClick={handleLogin}>Login</button>
-          </>
+          <div style={{height: '100vh', display: 'flex', justifyContent: 'center'}}>
+            <button className="search-button" style={{margin: 'auto'}} onClick={handleLogin}>Login</button>
+          </div>
         )}
       </div>
     </div >

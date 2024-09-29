@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCode, faDatabase, faWebAwesome } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import PlatformIcon from './Platform';
 import WebFrameIcon from './Webframe';
 
